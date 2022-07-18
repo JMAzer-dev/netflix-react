@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import {setDoc, doc} from 'firebase/firestore'
+import { setDoc, doc } from "firebase/firestore";
 
 const AuthContext = createContext();
 
@@ -15,9 +15,9 @@ export function AuthContextProvider({ children }) {
 
   function signUp(email, password) {
     createUserWithEmailAndPassword(auth, email, password);
-    setDoc(doc(db, 'users', email), {
-      moviesLiked: []
-    })
+    setDoc(doc(db, "users", email), {
+      moviesLiked: [],
+    });
   }
 
   function logIn(email, password) {
@@ -29,7 +29,7 @@ export function AuthContextProvider({ children }) {
   }
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
     return () => {

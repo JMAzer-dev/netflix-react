@@ -6,14 +6,14 @@ const Navbar = () => {
   const { user, logOut } = UserAuth();
   const navigate = useNavigate();
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     try {
-      await logOut()  
-      navigate('/')
+      await logOut();
+      navigate("/");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   return (
     <div className="flex items-center justify-between p-4 z-[100] absolute w-full">
       <Link to="/">
@@ -28,8 +28,9 @@ const Navbar = () => {
               <button className="text-white pr-4">Account</button>
             </Link>
             <Link to="/signup">
-              <button className="bg-red-600 px-5 py-2 rounded cursor-pointer text-white"
-              onClick={handleLogout}
+              <button
+                className="bg-red-600 px-5 py-2 rounded cursor-pointer text-white"
+                onClick={handleLogout}
               >
                 Logout
               </button>

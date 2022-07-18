@@ -33,8 +33,8 @@ const Row = ({ title, fetchURL, rowID }) => {
       <div className="relative flex items-center group">
         <MdChev.MdChevronLeft
           onClick={slideLeft}
-          className="bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
-          size={40}
+          className="bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block ml-4"
+          size={35}
         />
         <div
           id={"slider" + rowID}
@@ -47,8 +47,8 @@ const Row = ({ title, fetchURL, rowID }) => {
         </div>
         <MdChev.MdChevronRight
           onClick={slideRight}
-          className="bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
-          size={40}
+          className="bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block mr-4"
+          size={35}
         />
       </div>
     </>

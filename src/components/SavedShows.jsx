@@ -19,7 +19,7 @@ const SavedShows = () => {
   };
 
   const movieRef = doc(db, "users", `${user?.email}`);
-  
+
   useEffect(() => {
     //take a snapshot from database
     onSnapshot(movieRef, (doc) => {

@@ -2,10 +2,11 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+const {
+  initializeAppCheck,
+  ReCaptchaV3Provider,
+} = require("firebase/app-check");
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBl2sCSEASt5O2HuJQUO7Ot9fLJIs9oPBk",
   authDomain: "netflix-react-18735.firebaseapp.com",
@@ -18,4 +19,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app)
+export const db = getFirestore(app);
+
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider("abcdefghijklmnopqrstuvwxy-1234567890abcd"),
+
+  // Optional argument. If true, the SDK automatically refreshes App Check
+  // tokens as needed.
+  isTokenAutoRefreshEnabled: true,
+});
