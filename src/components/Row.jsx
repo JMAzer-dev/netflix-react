@@ -1,4 +1,3 @@
-// API
 import axios from "axios";
 
 // icons
