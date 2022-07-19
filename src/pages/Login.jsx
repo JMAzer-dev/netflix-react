@@ -58,8 +58,6 @@ const Login = () => {
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 />
-
-                {/* 6Lc5rf8gAAAAAGntVIRkBagvTt9d9x3Str7qpqfM // 6Lc5rf8gAAAAAGVC7JIIXGNqtsJ2qIN2KiilOxwS*/}
                 <button
                   data-sitekey="6Lc5rf8gAAAAAGVC7JIIXGNqtsJ2qIN2KiilOxwS"
                   data-callback="handleSubmit"
