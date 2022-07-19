@@ -10,12 +10,13 @@ const SignUp = () => {
   const { user, signUp } = UserAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, token) => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
-      navigate("/login");
+      await signUp(email, password, token);
+
+      navigate("/");
     } catch (error) {
       setError(error.message);
     }
@@ -53,7 +54,13 @@ const SignUp = () => {
                   autoComplete="current-password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <button className="bg-red-600 py-3 my-6 rounded font-semibold">
+                <button
+                  data-sitekey="6Lc5rf8gAAAAAGVC7JIIXGNqtsJ2qIN2KiilOxwS"
+                  data-callback="handleSubmit"
+                  data-action="submit"
+                  type="submit"
+                  className="bg-red-600 py-3 my-6 rounded font-semibold g-recaptcha"
+                >
                   Sign Up
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-500">

@@ -2,28 +2,29 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import bgNet from "../assets/bg-netflix.png";
+import { ReCaptchaV3Provider } from "firebase/app-check";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   const [error, setError] = useState(null);
   const { user, logIn } = UserAuth();
   const navigate = useNavigate();
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, token) => {
     e.preventDefault();
     setError("");
-    try {
-      await logIn(email, password);
-      navigate("/");
-    } catch (error) {
-      setError(error.message);
+    
+    const siteToken = ReCaptchaV3Provider.siteKey;    
+
+    if (siteToken === token) {
+      try {
+        await logIn(email, password, token);
+        navigate("/");
+      } catch (error) {
+        setError(error.message);
+      }
     }
   };
-
-  function onSubmit(token) {
-    document.getElementById("demo-form").submit();
-  }
 
   return (
     <>
@@ -47,17 +48,25 @@ const Login = () => {
                   className="p-3 my-2 bg-gray-700 rounded"
                   type="email"
                   placeholder="Email"
-                  autoComplete="email"
+                  required
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   className="p-3 my-2 bg-gray-700 rounded"
                   type="password"
                   placeholder="Password"
-                  autoComplete="current-password"
+                  required
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <button className="bg-red-600 py-3 my-6 rounded font-semibold">
+
+                {/* 6Lc5rf8gAAAAAGntVIRkBagvTt9d9x3Str7qpqfM // 6Lc5rf8gAAAAAGVC7JIIXGNqtsJ2qIN2KiilOxwS*/}
+                <button
+                  data-sitekey="6Lc5rf8gAAAAAGVC7JIIXGNqtsJ2qIN2KiilOxwS"
+                  data-callback="handleSubmit"
+                  data-action="submit"
+                  type="submit"
+                  className="bg-red-600 py-3 my-6 rounded font-semibold g-recaptcha"
+                >
                   Sign In
                 </button>
                 <div className="flex justify-between items-center text-sm text-gray-500">
